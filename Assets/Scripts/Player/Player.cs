@@ -1,44 +1,42 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
-    [Header("이동 및 점프 설정")]
-    public float moveSpeed = 5f;      // 이동 속도
-    public float jumpForce = 7f;      // 점프 힘
+    public float moveSpeed = 7f;
+    public float jumpForce = 10f;
 
     private Rigidbody rb;
-    private bool isGrounded;          // 바닥 체크
+    private CapsuleCollider col;
 
     void Start()
     {
-        // 3D용 리지드바디 컴포넌트 연결
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<CapsuleCollider>();
     }
 
     void Update()
     {
-        // 1. 좌우 이동 (방향키 왼쪽, 오른쪽 / A, D)
-        float moveInput = Input.GetAxisRaw("Horizontal");
+        // 1. 좌우 이동
+        float moveInput = 0;
+        if (Keyboard.current.leftArrowKey.isPressed || Keyboard.current.aKey.isPressed) moveInput = -1;
+        else if (Keyboard.current.rightArrowKey.isPressed || Keyboard.current.dKey.isPressed) moveInput = 1;
 
-        // 3D 공간에서 X축은 좌우, Y축은 높이입니다.
         rb.linearVelocity = new Vector3(moveInput * moveSpeed, rb.linearVelocity.y, 0);
 
-        // 2. 점프 (스페이스바)
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        // 2. 점프 (레이캐스트로 바닥 체크)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame && IsGrounded())
         {
-            // 위쪽 방향으로 순간적인 힘(Impulse)을 가함
+            // 점프할 때 기존 Y축 속도를 초기화해주면 훨씬 일정하게 뜁니다.
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, 0);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isGrounded = false; // 점프 중에는 바닥 상태를 false로
         }
     }
 
-    // 바닥과 충돌했을 때 호출되는 함수
-    private void OnCollisionEnter(Collision collision)
+    // 발바닥 아래로 짧은 선을 쏴서 땅이 있는지 확인하는 함수
+    bool IsGrounded()
     {
-        // 바닥 오브젝트의 태그(Tag)가 "Ground"인 경우에만 다시 점프 가능
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-        }
+        // 캡슐 콜라이더의 아래쪽 끝 지점에서 0.2만큼 아래로 레이를 쏩니다.
+        return Physics.Raycast(transform.position, Vector3.down, col.bounds.extents.y + 0.2f);
     }
 }
