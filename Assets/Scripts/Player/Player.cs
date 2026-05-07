@@ -3,40 +3,73 @@ using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
+    [Header("이동 설정")]
     public float moveSpeed = 7f;
     public float jumpForce = 10f;
 
     private Rigidbody rb;
     private CapsuleCollider col;
+    private float minX = float.MaxValue;
+    private float maxX = float.MinValue;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
+
+        // 1. 모든 "Ground" 태그를 가진 오브젝트를 찾습니다.
+        GameObject[] grounds = GameObject.FindGameObjectsWithTag("Ground");
+
+        if (grounds.Length > 0)
+        {
+            foreach (GameObject g in grounds)
+            {
+                Collider groundCol = g.GetComponent<Collider>();
+                if (groundCol != null)
+                {
+                    // 모든 바닥 중 가장 왼쪽(min)과 가장 오른쪽(max)을 찾음
+                    if (groundCol.bounds.min.x < minX) minX = groundCol.bounds.min.x;
+                    if (groundCol.bounds.max.x > maxX) maxX = groundCol.bounds.max.x;
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("바닥 타일들에 'Ground' 태그가 설정되어 있는지 확인하세요!");
+        }
+
+        // 회전 고정 및 Z축 이동 방지
+        rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
     }
 
     void Update()
     {
-        // 1. 좌우 이동
+        // 좌우 입력
         float moveInput = 0;
         if (Keyboard.current.leftArrowKey.isPressed || Keyboard.current.aKey.isPressed) moveInput = -1;
         else if (Keyboard.current.rightArrowKey.isPressed || Keyboard.current.dKey.isPressed) moveInput = 1;
 
+        // 이동 적용
         rb.linearVelocity = new Vector3(moveInput * moveSpeed, rb.linearVelocity.y, 0);
 
-        // 2. 점프 (레이캐스트로 바닥 체크)
+        // 점프
         if (Keyboard.current.spaceKey.wasPressedThisFrame && IsGrounded())
         {
-            // 점프할 때 기존 Y축 속도를 초기화해주면 훨씬 일정하게 뜁니다.
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, 0);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 
-    // 발바닥 아래로 짧은 선을 쏴서 땅이 있는지 확인하는 함수
+    void LateUpdate()
+    {
+        // 2. 계산된 전체 바닥 범위 밖으로 나가지 못하게 고정
+        float playerHalfWidth = col.radius;
+        float clampedX = Mathf.Clamp(transform.position.x, minX + playerHalfWidth, maxX - playerHalfWidth);
+        transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
+    }
+
     bool IsGrounded()
     {
-        // 캡슐 콜라이더의 아래쪽 끝 지점에서 0.2만큼 아래로 레이를 쏩니다.
         return Physics.Raycast(transform.position, Vector3.down, col.bounds.extents.y + 0.2f);
     }
 }
