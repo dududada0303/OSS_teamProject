@@ -72,4 +72,16 @@ public class Player : MonoBehaviour
     {
         return Physics.Raycast(transform.position, Vector3.down, col.bounds.extents.y + 0.2f);
     }
+    // 물리적인 충돌이 발생했을 때 유니티가 자동으로 실행해 주는 함수
+    private void OnCollisionEnter(Collision collision)
+    {
+        // 부딪힌 대상의 태그가 아까 만든 "Obstacle"인지 확인
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            Debug.Log("장애물에 충돌했습니다!");
+
+            // 임시로 게임의 시간을 멈춰서 제대로 충돌했는지 확인하는 용도
+            Time.timeScale = 0f;
+        }
+    }
 }
