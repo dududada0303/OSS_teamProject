@@ -3,24 +3,28 @@
   "WorkspaceRootPath": "D:\\Programing\\OSS_3D-RunGame\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7FFE0943-5E4A-7035-6446-BE2DDF76A045}|Assembly-CSharp.csproj|d:\\programing\\oss_3d-rungame\\assets\\scripts\\gamemanager\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7FFE0943-5E4A-7035-6446-BE2DDF76A045}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamemanager\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7FFE0943-5E4A-7035-6446-BE2DDF76A045}|Assembly-CSharp.csproj|D:\\Programing\\OSS_3D-RunGame\\assets\\scripts\\player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7FFE0943-5E4A-7035-6446-BE2DDF76A045}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7FFE0943-5E4A-7035-6446-BE2DDF76A045}|Assembly-CSharp.csproj|D:\\Programing\\OSS_3D-RunGame\\assets\\scripts\\constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7FFE0943-5E4A-7035-6446-BE2DDF76A045}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\constants.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7FFE0943-5E4A-7035-6446-BE2DDF76A045}|Assembly-CSharp.csproj|d:\\programing\\oss_3d-rungame\\assets\\scripts\\ground\\ground.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7FFE0943-5E4A-7035-6446-BE2DDF76A045}|Assembly-CSharp.csproj|D:\\Programing\\OSS_3D-RunGame\\assets\\scripts\\ground\\ground.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7FFE0943-5E4A-7035-6446-BE2DDF76A045}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ground\\ground.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7FFE0943-5E4A-7035-6446-BE2DDF76A045}|Assembly-CSharp.csproj|D:\\Programing\\OSS_3D-RunGame\\assets\\scripts\\player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7FFE0943-5E4A-7035-6446-BE2DDF76A045}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7FFE0943-5E4A-7035-6446-BE2DDF76A045}|Assembly-CSharp.csproj|d:\\programing\\oss_3d-rungame\\assets\\scripts\\gamemanager\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7FFE0943-5E4A-7035-6446-BE2DDF76A045}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamemanager\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7FFE0943-5E4A-7035-6446-BE2DDF76A045}|Assembly-CSharp.csproj|D:\\Programing\\OSS_3D-RunGame\\assets\\scripts\\camera\\trackingplayercamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7FFE0943-5E4A-7035-6446-BE2DDF76A045}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\camera\\trackingplayercamera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7FFE0943-5E4A-7035-6446-BE2DDF76A045}|Assembly-CSharp.csproj|d:\\programing\\oss_3d-rungame\\assets\\scripts\\gamemanager\\distancemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7FFE0943-5E4A-7035-6446-BE2DDF76A045}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamemanager\\distancemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,17 +34,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
+              "Title": "DistanceManager.cs",
+              "DocumentMoniker": "D:\\Programing\\OSS_3D-RunGame\\Assets\\Scripts\\GameManager\\DistanceManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\GameManager\\DistanceManager.cs",
+              "ToolTip": "D:\\Programing\\OSS_3D-RunGame\\Assets\\Scripts\\GameManager\\DistanceManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\GameManager\\DistanceManager.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T15:15:07.189Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "GameManager.cs",
               "DocumentMoniker": "D:\\Programing\\OSS_3D-RunGame\\Assets\\Scripts\\GameManager\\GameManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\GameManager\\GameManager.cs",
               "ToolTip": "D:\\Programing\\OSS_3D-RunGame\\Assets\\Scripts\\GameManager\\GameManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\GameManager\\GameManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-05T06:41:48.428Z",
               "EditorCaption": ""
@@ -53,20 +70,20 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Constants.cs",
               "ToolTip": "D:\\Programing\\OSS_3D-RunGame\\Assets\\Scripts\\Constants.cs",
               "RelativeToolTip": "Assets\\Scripts\\Constants.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-05T06:09:27.187Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Player.cs",
               "DocumentMoniker": "D:\\Programing\\OSS_3D-RunGame\\Assets\\Scripts\\Player\\Player.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\Player.cs",
               "ToolTip": "D:\\Programing\\OSS_3D-RunGame\\Assets\\Scripts\\Player\\Player.cs",
               "RelativeToolTip": "Assets\\Scripts\\Player\\Player.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAATAAAAAAAAAA==",
+              "ViewState": "AgIAACIAAAAAAAAAAAAgwCoAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-05T05:58:33.26Z",
               "EditorCaption": ""
@@ -79,7 +96,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Camera\\TrackingPlayerCamera.cs",
               "ToolTip": "D:\\Programing\\OSS_3D-RunGame\\Assets\\Scripts\\Camera\\TrackingPlayerCamera.cs",
               "RelativeToolTip": "Assets\\Scripts\\Camera\\TrackingPlayerCamera.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-05T05:57:29.624Z",
               "EditorCaption": ""
@@ -92,7 +109,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Ground\\Ground.cs",
               "ToolTip": "D:\\Programing\\OSS_3D-RunGame\\Assets\\Scripts\\Ground\\Ground.cs",
               "RelativeToolTip": "Assets\\Scripts\\Ground\\Ground.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-05T05:56:17.013Z",
               "EditorCaption": ""

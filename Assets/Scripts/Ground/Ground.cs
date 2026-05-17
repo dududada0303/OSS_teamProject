@@ -9,11 +9,22 @@ public class Ground : MonoBehaviour
 
     [Header("장애물 설정")]
     // 맵 위에 올려둘 장애물이나 아이템 오브젝트를 여기에 연결해주세요.
-    public GameObject obstacle;
+    public GameObject[] obstacles;
+
+    // 장애물 생성 확률 슬라이더
+    [Range(0, 100)]
+    public int spawnProbability = 50; // 기본 확률은 50%로 설정
 
     void Start()
     {
-
+        //  게임이 시작될 때, 일단 이 바닥에 있는 모든 장애물을 안 보이게 만듭니다.(초반 안전지대 형성)
+        for (int i = 0; i < obstacles.Length; i++)
+        {
+            if (obstacles[i] != null)
+            {
+                obstacles[i].SetActive(false);
+            }
+        }
     }
 
     void Update()
@@ -23,7 +34,7 @@ public class Ground : MonoBehaviour
 
         if (CheckReset())
         {
-            ResetGround(Random.Range(1, 101) <= 50);
+            ResetGround();
         }
     }
 
@@ -38,9 +49,9 @@ public class Ground : MonoBehaviour
     {
         return transform.position.z < Constants.GroundResetZPosition;
     }
-
+    
     // 위치를 초기화 시킵니다.
-    void ResetGround(bool spawnObstacle)
+    void ResetGround()
     {
         float distance = Constants.GroundDistanceZ;
 
@@ -50,10 +61,18 @@ public class Ground : MonoBehaviour
             transform.position = nextGround.transform.position + (Vector3.forward * distance);
         }
 
-        // 확률에 따라 장애물을 켜거나 끕니다.
-        if (obstacle != null)
+        // 반복문(for)을 사용해 서랍장(배열)에 들어있는 장애물들을 하나씩 검사합니다.
+        for (int i = 0; i < obstacles.Length; i++)
         {
-            obstacle.SetActive(spawnObstacle);
+            // 혹시 실수로 빈칸을 만들어두었을 경우를 대비한 안전장치입니다.
+            if (obstacles[i] != null)
+            {
+                // 각 장애물 자리마다 우리가 설정한 확률(예: 50%)로 주사위를 굴립니다!
+                bool shouldSpawn = Random.Range(1, 101) <= spawnProbability;
+
+                // 주사위 결과에 따라 켜거나 끕니다.
+                obstacles[i].SetActive(shouldSpawn);
+            }
         }
     }
 

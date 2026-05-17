@@ -80,7 +80,26 @@ public class Player : MonoBehaviour
         {
             Debug.Log("장애물에 충돌했습니다!");
 
-            // 임시로 게임의 시간을 멈춰서 제대로 충돌했는지 확인하는 용도
+            Die();
+        }
+    }
+
+    // 캐릭터 사망 및 게임 종료 처리를 담당하는 함수
+    public void Die()
+    {
+        // 1. 플레이어 캐릭터를 화면에서 보이지 않게(비활성화) 만듭니다.
+        gameObject.SetActive(false);
+
+        // 2. 씬(Scene)에 있는 GameManager를 찾아서 게임 오버 처리를 맡깁니다.
+        GameManager gameManager = FindObjectOfType<GameManager>();
+
+        // 3. GameManager가 정상적으로 찾아졌을 때만 EndGame()을 실행합니다. (버그 방지 안전장치)
+        if (gameManager != null)
+        {
+            gameManager.EndGame();
+        }
+        else
+        {
             Time.timeScale = 0f;
         }
     }
