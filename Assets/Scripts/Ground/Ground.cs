@@ -4,12 +4,15 @@ public class Ground : MonoBehaviour
 {
     public float moveSpeed = 5.0f;
 
-    // 무한 스크롤링을 위한 다음 지면
     private Ground nextGround;
 
     [Header("장애물 설정")]
-    // 맵 위에 올려둘 장애물이나 아이템 오브젝트를 여기에 연결해주세요.
-    public GameObject obstacle;
+    // 여러 장애물을 배열로 등록하세요.
+    public GameObject[] obstacles;
+
+    [Header("장애물 X 범위")]
+    public float obstacleMinX = -2f;
+    public float obstacleMaxX = 2f;
 
     void Start()
     {
@@ -18,7 +21,6 @@ public class Ground : MonoBehaviour
 
     void Update()
     {
-
         Move();
 
         if (CheckReset())
@@ -27,40 +29,50 @@ public class Ground : MonoBehaviour
         }
     }
 
-    // 이동 함수
     void Move()
     {
         transform.position += Vector3.back * moveSpeed * Time.deltaTime;
     }
 
-    // 초기화 위치인지 확인합니다.
     bool CheckReset()
     {
         return transform.position.z < Constants.GroundResetZPosition;
     }
 
-    // 위치를 초기화 시킵니다.
     void ResetGround(bool spawnObstacle)
     {
         float distance = Constants.GroundDistanceZ;
 
-        // nextGround가 비어있지 않을 때만 위치를 이동시킵니다.
         if (nextGround != null)
         {
             transform.position = nextGround.transform.position + (Vector3.forward * distance);
         }
 
-        // 확률에 따라 장애물을 켜거나 끕니다.
-        if (obstacle != null)
+        // 먼저 모든 장애물을 꺼줍니다.
+        foreach (GameObject obs in obstacles)
         {
-            obstacle.SetActive(spawnObstacle);
+            if (obs != null)
+                obs.SetActive(false);
+        }
+
+        // 장애물을 생성할 차례라면, 배열에서 하나를 랜덤으로 골라 켭니다.
+        if (spawnObstacle && obstacles.Length > 0)
+        {
+            int randomIndex = Random.Range(0, obstacles.Length);
+            GameObject chosen = obstacles[randomIndex];
+
+            chosen.SetActive(true);
+
+            // 월드 좌표로 X 위치 랜덤 배치
+            float randomX = Random.Range(obstacleMinX, obstacleMaxX);
+            Vector3 worldPos = chosen.transform.position;
+            worldPos.x = transform.position.x + randomX;
+            chosen.transform.position = worldPos;
         }
     }
 
-    // 다음 지면 위치를 설정합니다.
     public void SetNextGround(Ground nextGround)
     {
         this.nextGround = nextGround;
     }
 }
-
