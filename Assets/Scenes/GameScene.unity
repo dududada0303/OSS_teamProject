@@ -161,7 +161,7 @@ PrefabInstance:
     - target: {fileID: 730066582556060305, guid: 65665334281f5d743b69dbcca684198e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: cf371d5ab0577bc4fb248e26942e7d30, type: 2}
+      objectReference: {fileID: 2100000, guid: 13cec97462df39a4488ed01ff181a7dc, type: 2}
     - target: {fileID: 1142376917932988146, guid: 65665334281f5d743b69dbcca684198e, type: 3}
       propertyPath: m_Name
       value: Ground (3)
@@ -411,7 +411,7 @@ PrefabInstance:
     - target: {fileID: 730066582556060305, guid: 65665334281f5d743b69dbcca684198e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: cf371d5ab0577bc4fb248e26942e7d30, type: 2}
+      objectReference: {fileID: 2100000, guid: 13cec97462df39a4488ed01ff181a7dc, type: 2}
     - target: {fileID: 1142376917932988146, guid: 65665334281f5d743b69dbcca684198e, type: 3}
       propertyPath: m_Name
       value: Ground (1)
@@ -590,7 +590,6 @@ GameObject:
   - component: {fileID: 618446528}
   - component: {fileID: 618446527}
   - component: {fileID: 618446526}
-  - component: {fileID: 618446532}
   - component: {fileID: 618446531}
   m_Layer: 0
   m_Name: Player
@@ -609,7 +608,7 @@ Rigidbody:
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_AngularDamping: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -674,7 +673,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cf371d5ab0577bc4fb248e26942e7d30, type: 2}
+  - {fileID: 2100000, guid: 2b028003f82c73142b829f81f761a30b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -733,22 +732,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63692bba20d938244ac4b952450cfc03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  moveSpeed: 5
-  jumpForce: 7
---- !u!114 &618446532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618446525}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63692bba20d938244ac4b952450cfc03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Player
-  moveSpeed: 5
-  jumpForce: 7
+  moveSpeed: 7
+  jumpForce: 10
 --- !u!1 &722853418
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,7 +1066,7 @@ PrefabInstance:
     - target: {fileID: 730066582556060305, guid: 65665334281f5d743b69dbcca684198e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: cf371d5ab0577bc4fb248e26942e7d30, type: 2}
+      objectReference: {fileID: 2100000, guid: 13cec97462df39a4488ed01ff181a7dc, type: 2}
     - target: {fileID: 1142376917932988146, guid: 65665334281f5d743b69dbcca684198e, type: 3}
       propertyPath: m_Name
       value: Ground (5)
@@ -1177,7 +1162,7 @@ PrefabInstance:
     - target: {fileID: 730066582556060305, guid: 65665334281f5d743b69dbcca684198e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: cf371d5ab0577bc4fb248e26942e7d30, type: 2}
+      objectReference: {fileID: 2100000, guid: 13cec97462df39a4488ed01ff181a7dc, type: 2}
     - target: {fileID: 1142376917932988146, guid: 65665334281f5d743b69dbcca684198e, type: 3}
       propertyPath: m_Name
       value: Ground (0)
@@ -1314,7 +1299,7 @@ PrefabInstance:
     - target: {fileID: 730066582556060305, guid: 65665334281f5d743b69dbcca684198e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: cf371d5ab0577bc4fb248e26942e7d30, type: 2}
+      objectReference: {fileID: 2100000, guid: 13cec97462df39a4488ed01ff181a7dc, type: 2}
     - target: {fileID: 1142376917932988146, guid: 65665334281f5d743b69dbcca684198e, type: 3}
       propertyPath: m_Name
       value: Ground (4)
