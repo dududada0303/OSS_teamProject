@@ -1,11 +1,21 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+// 데이터 베이스를 사용하기 위함
+using SQLite;
+using System.IO;
+// 리스트나 딕셔너리같은 동적 데이터 묶음을 사용하기위해 필요하다.
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
     [Header("바닥 설정")]
     public GameObject groundPrefab; 
     public int groundCount = 7;     // 게임에 깔아둘 바닥의 총 개수
+
+    public LeaderBoard leaderBoard;
+    public CoinManager coinManager;
+    public DistanceManager distanceManager;
+    public Database_Test db;
 
     // 생성된 바닥들을 기억해 둘 배열
     private Ground[] grounds;
@@ -16,6 +26,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        leaderBoard = FindObjectOfType<LeaderBoard>();
+        coinManager = FindObjectOfType<CoinManager>();
+        distanceManager = FindObjectOfType<DistanceManager>();
+        db = FindObjectOfType<Database_Test>();
 
         // 1. 게임이 시작될 때 게임 오버 UI가 켜져 있다면 꺼줍니다.
         if (gameoverUI != null)
@@ -51,6 +65,7 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
     void Update()
     {
         // 2. 만약 게임 오버 상태인데 플레이어가 'R' 키(또는 원하는 키)를 누른다면?
@@ -58,6 +73,13 @@ public class GameManager : MonoBehaviour
         {
             // 게임을 처음부터 다시 시작합니다!
             RestartGame();
+        }
+        else
+        {
+            // E 키를 누르면 아예 게임을 종료하고
+            // 현재 데이터를 최신화
+            if (Input.GetKeyDown(KeyCode.E))
+            EndEverythings();
         }
     }
 
@@ -83,5 +105,21 @@ public class GameManager : MonoBehaviour
 
         // 현재 우리가 플레이하고 있는 씬(맵)의 이름을 가져와서 처음부터 다시 로딩합니다.
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    
+    private void EndEverythings()
+    {
+        leaderBoard.coinCnt = coinManager.coinCount;
+        leaderBoard.Distance = (int)distanceManager.currentDistance;
+
+        db.InsertData(leaderBoard.userName, leaderBoard.coinCnt, leaderBoard.Distance);
+        Debug.Log(leaderBoard.userName+ ' ' + leaderBoard.coinCnt + ' ' + leaderBoard.Distance);
+        
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+    Application.Quit();
+#endif
     }
 }
