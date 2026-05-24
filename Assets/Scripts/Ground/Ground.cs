@@ -1,9 +1,9 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Ground : MonoBehaviour
 {
     public float moveSpeed = 5.0f;
-
     private Ground nextGround;
 
     [Header("Visual Settings")]
@@ -21,6 +21,7 @@ public class Ground : MonoBehaviour
     public float coinSpawnRadius = 0.5f;
 
     private GameObject[] coins;
+    private float[] lanes = { -3.0f, 0.0f, 3.0f };
 
     void Start()
     {
@@ -76,12 +77,25 @@ public class Ground : MonoBehaviour
 
         ApplyGrassMaterial();
 
+        List<float> availableLanes = new List<float>(lanes);
+
         for (int i = 0; i < obstacles.Length; i++)
         {
             if (obstacles[i] != null)
             {
-                bool shouldSpawn = Random.Range(1, 101) <= spawnProbability;
+                bool shouldSpawn = Random.Range(1, 101) <= spawnProbability && availableLanes.Count > 0;
                 obstacles[i].SetActive(shouldSpawn);
+
+                if (shouldSpawn)
+                {
+                    int randomIndex = Random.Range(0, availableLanes.Count);
+                    float chosenX = availableLanes[randomIndex];
+
+                    availableLanes.RemoveAt(randomIndex);
+
+                    Vector3 currentPos = obstacles[i].transform.localPosition;
+                    obstacles[i].transform.localPosition = new Vector3(chosenX, currentPos.y, currentPos.z);
+                }
             }
         }
 
