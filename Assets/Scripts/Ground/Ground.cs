@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
+using System.Collections;
 
 public class Ground : MonoBehaviour
 {
@@ -21,9 +23,13 @@ public class Ground : MonoBehaviour
     public float coinSpawnRadius = 0.5f; // 장애물과 겹치는지 판단할 기준 반경 (코인 크기 정도)
 
     private GameObject[] coins; // 만들어둔 코인들을 보관할 서랍장
+    public LeaderBoard leaderboard;
 
     void Start()
     {
+        leaderboard = FindObjectOfType<LeaderBoard>();
+        leaderboard.userName = null;
+
         //  게임이 시작될 때, 일단 이 바닥에 있는 모든 장애물을 안 보이게 만듭니다.(초반 안전지대 형성)
         for (int i = 0; i < obstacles.Length; i++)
         {
@@ -48,6 +54,12 @@ public class Ground : MonoBehaviour
 
     void Update()
     {
+        if (leaderboard == null || string.IsNullOrEmpty(leaderboard.userName))
+            return;
+        else
+        {
+            leaderboard.gameObject.SetActive(false);
+        }  
 
         Move();
 
