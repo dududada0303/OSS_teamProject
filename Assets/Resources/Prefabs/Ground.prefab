@@ -72,7 +72,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0a156a7bab9c93c49ae4ec0dba2ff757, type: 2}
+  - {fileID: 2100000, guid: 1b41e03f811c2474395f90e1f6751193, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ground
   moveSpeed: 5
-  grassMaterial: {fileID: 2100000, guid: 0a156a7bab9c93c49ae4ec0dba2ff757, type: 2}
+  grassMaterial: {fileID: 2100000, guid: 1b41e03f811c2474395f90e1f6751193, type: 2}
   obstacles:
   - {fileID: 2248866678231974641}
   - {fileID: 3878421774125620752}
@@ -541,7 +541,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 13cec97462df39a4488ed01ff181a7dc, type: 2}
+  - {fileID: 2100000, guid: 1b41e03f811c2474395f90e1f6751193, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
