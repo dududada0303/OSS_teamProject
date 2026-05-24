@@ -1116,6 +1116,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 230194592}
     m_Modifications:
+    - target: {fileID: 1916799510495696275, guid: bdbf811528419b540805cf14dec86df5, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 9ba419dec7183184e960cb643e624d3e, type: 3}
+    - target: {fileID: 1916799510495696275, guid: bdbf811528419b540805cf14dec86df5, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: edd937fb2e80ed7478b8af7507102a78, type: 2}
     - target: {fileID: 2777180684130930147, guid: bdbf811528419b540805cf14dec86df5, type: 3}
       propertyPath: m_Name
       value: SM_CartoonAnimal_Cat
