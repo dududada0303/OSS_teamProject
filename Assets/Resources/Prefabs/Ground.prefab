@@ -54,7 +54,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142376917932988146}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -72,7 +72,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cf371d5ab0577bc4fb248e26942e7d30, type: 2}
+  - {fileID: 2100000, guid: 0a156a7bab9c93c49ae4ec0dba2ff757, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ground
   moveSpeed: 5
+  grassMaterial: {fileID: 2100000, guid: 0a156a7bab9c93c49ae4ec0dba2ff757, type: 2}
   obstacles:
   - {fileID: 2248866678231974641}
   - {fileID: 3878421774125620752}
