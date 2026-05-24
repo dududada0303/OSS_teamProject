@@ -9,7 +9,7 @@ public class CoinManager : MonoBehaviour
     [Header("UI 연결")]
     public TextMeshProUGUI coinText;
 
-    private int coinCount = 0; // 획득한 코인 개수
+    public int coinCount = 0; // 획득한 코인 개수
 
     void Awake()
     {
