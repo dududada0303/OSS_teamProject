@@ -7,8 +7,7 @@ public class TrackingPlayerCamera : MonoBehaviour
     // 플레이어와 카메라 사이 항상 존재해야하는 거리 값
     public float distanceBetween;
 
-    // 플레이어가 움직인 후 카메라가 따라가야 하므로,
-    // LateUpdate() 메서드 이용
+    // 플레이어가 움직인 후 카메라가 따라가야 하므로, LateUpdate() 메서드 이용
     private void LateUpdate()
     {
         // 카메라의 현재 위치
