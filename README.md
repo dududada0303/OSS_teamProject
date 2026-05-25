@@ -95,9 +95,19 @@ Prefab Override(Apply All)를 활용해 무한 스크롤되는 모든 바닥 맵
 4. 배경 추가
 - 2D 배경 추가
 
-=======
->>>>>>> parent of 1b8de2b (Merge branch 'synthesis_backup' of https://github.com/dududada0303/OSS_teamProject into synthesis_backup)
------------------------------------------------------------------------------------------------------------------------------
+[2025.05.25]
+1. synthesis_backup 브랜치를 잘못 건드려서 synthesis_backup2 브랜치를 default 브랜치로 써야 할 거 같아요.
+
+2. 고양이 추가
+- Cat_Horder Y -1
+- Cat Y 1
+  
+3. 배경 추가
+- BG_Canvas - Background
+   Render Mode - Screen Space - Camera
+   Render Camera - Main Camera
+   Plane Distance - 100
+   
 [김은규]
 
 [2026.05.06]
