@@ -1,36 +1,43 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using System.Collections;
+using System.Collections.Generic; // ëŸ°íƒ€ì„ ë ˆì¸ ê´€ë¦¬ë¥¼ ìœ„í•´ ì¶”ê°€
 
 public class Ground : MonoBehaviour
 {
     public float moveSpeed = 5.0f;
 
-    // ¹«ÇÑ ½ºÅ©·Ñ¸µÀ» À§ÇÑ ´ÙÀ½ Áö¸é
+    // ë¬´í•œ ìŠ¤í¬ë¡¤ë§ì„ ìœ„í•œ ë‹¤ìŒ ì§€ë©´
     private Ground nextGround;
 
-    [Header("Àå¾Ö¹° ¼³Á¤")]
-    // ¸Ê À§¿¡ ¿Ã·ÁµÑ Àå¾Ö¹°ÀÌ³ª ¾ÆÀÌÅÛ ¿ÀºêÁ§Æ®¸¦ ¿©±â¿¡ ¿¬°áÇØÁÖ¼¼¿ä.
+    [Header("ì¥ì• ë¬¼ ì„¤ì •")]
+    // ë§µ ìœ„ì— ì˜¬ë ¤ë‘˜ ì¥ì• ë¬¼ì´ë‚˜ ì•„ì´í…œ ì˜¤ë¸Œì íŠ¸ë¥¼ ì—¬ê¸°ì— ì—°ê²°í•´ì£¼ì„¸ìš”.
     public GameObject[] obstacles;
 
-    // Àå¾Ö¹° »ı¼º È®·ü ½½¶óÀÌ´õ
+    // ì¥ì• ë¬¼ ìƒì„± í™•ë¥  ìŠ¬ë¼ì´ë”
     [Range(0, 100)]
-    public int spawnProbability = 50; // ±âº» È®·üÀº 50%·Î ¼³Á¤
+    public int spawnProbability = 50; // ê¸°ë³¸ í™•ë¥ ì€ 50%ë¡œ ì„¤ì •
 
-    [Header("ÄÚÀÎ ¼³Á¤")]
-    public GameObject coinPrefab;     // ÄÚÀÎ ÇÁ¸®ÆÕ
-    public int maxCoinsPerGround = 3; // ¹Ù´Ú Å¸ÀÏ ÇÏ³ª´ç »ı¼ºÇÒ ÃÖ´ë ÄÚÀÎ °³¼ö
-    public float coinSpawnRadius = 0.5f; // Àå¾Ö¹°°ú °ãÄ¡´ÂÁö ÆÇ´ÜÇÒ ±âÁØ ¹İ°æ (ÄÚÀÎ Å©±â Á¤µµ)
+    [Header("ì½”ì¸ ì„¤ì •")]
+    public GameObject coinPrefab;     // ì½”ì¸ í”„ë¦¬íŒ¹
+    public int maxCoinsPerGround = 3; // ë°”ë‹¥ íƒ€ì¼ í•˜ë‚˜ë‹¹ ìƒì„±í•  ìµœëŒ€ ì½”ì¸ ê°œìˆ˜
+    public float coinSpawnRadius = 0.5f; // ì¥ì• ë¬¼ê³¼ ê²¹ì¹˜ëŠ”ì§€ íŒë‹¨í•  ê¸°ì¤€ ë°˜ê²½ (ì½”ì¸ í¬ê¸° ì •ë„)
 
-    private GameObject[] coins; // ¸¸µé¾îµĞ ÄÚÀÎµéÀ» º¸°üÇÒ ¼­¶øÀå
+    private GameObject[] coins; // ë§Œë“¤ì–´ë‘” ì½”ì¸ë“¤ì„ ë³´ê´€í•  ì„œëì¥
     public LeaderBoard leaderboard;
+
+    // ğŸƒâ€â™‚ï¸ ê²Œì„ì—ì„œ ì‚¬ìš©í•  ê¸°ë³¸ 3ê°œ ë ˆì¸ì˜ X ì¢Œí‘œ ê¸°ì¤€ê°’
+    private float[] lanes = { -3.0f, 0.0f, 3.0f };
 
     void Start()
     {
         leaderboard = FindObjectOfType<LeaderBoard>();
-        leaderboard.userName = null;
+        if (leaderboard != null)
+        {
+            leaderboard.userName = null;
+        }
 
-        //  °ÔÀÓÀÌ ½ÃÀÛµÉ ¶§, ÀÏ´Ü ÀÌ ¹Ù´Ú¿¡ ÀÖ´Â ¸ğµç Àå¾Ö¹°À» ¾È º¸ÀÌ°Ô ¸¸µì´Ï´Ù.(ÃÊ¹İ ¾ÈÀüÁö´ë Çü¼º)
+        // ê²Œì„ì´ ì‹œì‘ë  ë•Œ, ì¼ë‹¨ ì´ ë°”ë‹¥ì— ìˆëŠ” ëª¨ë“  ì¥ì• ë¬¼ì„ ì•ˆ ë³´ì´ê²Œ ë§Œë“­ë‹ˆë‹¤.(ì´ˆë°˜ ì•ˆì „ì§€ëŒ€ í˜•ì„±)
         for (int i = 0; i < obstacles.Length; i++)
         {
             if (obstacles[i] != null)
@@ -39,15 +46,15 @@ public class Ground : MonoBehaviour
             }
         }
 
-        // ¹Ù´ÚÀÌ Ã³À½ ¸¸µé¾îÁú ¶§ ÄÚÀÎµµ ¹Ì¸® ÃÖ´ëÄ¡¸¸Å­ ¸¸µé¾îµÓ´Ï´Ù.
+        // ë°”ë‹¥ì´ ì²˜ìŒ ë§Œë“¤ì–´ì§ˆ ë•Œ ì½”ì¸ë„ ë¯¸ë¦¬ ìµœëŒ€ì¹˜ë§Œí¼ ë§Œë“¤ì–´ë‘¡ë‹ˆë‹¤.
         if (coinPrefab != null)
         {
             coins = new GameObject[maxCoinsPerGround];
             for (int i = 0; i < maxCoinsPerGround; i++)
             {
-                // ÄÚÀÎÀ» ÇöÀç ¹Ù´ÚÀÇ ÀÚ½Ä ¿ÀºêÁ§Æ®·Î »ı¼ºÇÕ´Ï´Ù.
+                // ì½”ì¸ì„ í˜„ì¬ ë°”ë‹¥ì˜ ìì‹ ì˜¤ë¸Œì íŠ¸ë¡œ ìƒì„±í•©ë‹ˆë‹¤.
                 coins[i] = Instantiate(coinPrefab, transform);
-                coins[i].SetActive(false); // ÀÏ´ÜÀº ¼û°ÜµÓ´Ï´Ù.
+                coins[i].SetActive(false); // ì¼ë‹¨ì€ ìˆ¨ê²¨ë‘¡ë‹ˆë‹¤.
             }
         }
     }
@@ -59,7 +66,7 @@ public class Ground : MonoBehaviour
         else
         {
             leaderboard.gameObject.SetActive(false);
-        }  
+        }
 
         Move();
 
@@ -69,59 +76,77 @@ public class Ground : MonoBehaviour
         }
     }
 
-    // ÀÌµ¿ ÇÔ¼ö
+    // ì´ë™ í•¨ìˆ˜
     void Move()
     {
         transform.position += Vector3.back * moveSpeed * Time.deltaTime;
     }
 
-    // ÃÊ±âÈ­ À§Ä¡ÀÎÁö È®ÀÎÇÕ´Ï´Ù.
+    // ì´ˆê¸°í™” ìœ„ì¹˜ì¸ì§€ í™•ì¸í•©ë‹ˆë‹¤.
     bool CheckReset()
     {
         return transform.position.z < Constants.GroundResetZPosition;
     }
-    
-    // À§Ä¡¸¦ ÃÊ±âÈ­ ½ÃÅµ´Ï´Ù.
+
+    // ìœ„ì¹˜ë¥¼ ì´ˆê¸°í™” ì‹œí‚µë‹ˆë‹¤.
     void ResetGround()
     {
         float distance = Constants.GroundDistanceZ;
 
-        // nextGround°¡ ºñ¾îÀÖÁö ¾ÊÀ» ¶§¸¸ À§Ä¡¸¦ ÀÌµ¿½ÃÅµ´Ï´Ù.
+        // nextGroundê°€ ë¹„ì–´ìˆì§€ ì•Šì„ ë•Œë§Œ ìœ„ì¹˜ë¥¼ ì´ë™ì‹œí‚µë‹ˆë‹¤.
         if (nextGround != null)
         {
             transform.position = nextGround.transform.position + (Vector3.forward * distance);
         }
 
-        // ¹İº¹¹®(for)À» »ç¿ëÇØ ¼­¶øÀå(¹è¿­)¿¡ µé¾îÀÖ´Â Àå¾Ö¹°µéÀ» ÇÏ³ª¾¿ °Ë»çÇÕ´Ï´Ù.
+        // -----------------------------------------------------------------
+        // [ìˆ˜ì •ëœ ì¥ì• ë¬¼ ëœë¤ ìƒì„± íŒŒíŠ¸] 
+        // -----------------------------------------------------------------
+        // ì‚¬ìš©í•  ìˆ˜ ìˆëŠ” ë ˆì¸ ëª©ë¡ì„ ë‹´ì€ ë³µì‚¬ ë¦¬ìŠ¤íŠ¸ë¥¼ ë§Œë“­ë‹ˆë‹¤.
+        List<float> availableLanes = new List<float>(lanes);
+
         for (int i = 0; i < obstacles.Length; i++)
         {
-            // È¤½Ã ½Ç¼ö·Î ºóÄ­À» ¸¸µé¾îµÎ¾úÀ» °æ¿ì¸¦ ´ëºñÇÑ ¾ÈÀüÀåÄ¡ÀÔ´Ï´Ù.
             if (obstacles[i] != null)
             {
-                // °¢ Àå¾Ö¹° ÀÚ¸®¸¶´Ù ¿ì¸®°¡ ¼³Á¤ÇÑ È®·ü(¿¹: 50%)·Î ÁÖ»çÀ§¸¦ ±¼¸³´Ï´Ù!
-                bool shouldSpawn = Random.Range(1, 101) <= spawnProbability;
+                // ì£¼ì‚¬ìœ„ í™•ë¥ ì„ ì²´í¬í•˜ê³ , ë™ì‹œì— ë‚¨ì€ ë ˆì¸ ìë¦¬ê°€ ìˆëŠ”ì§€ë„ í™•ì¸í•©ë‹ˆë‹¤.
+                bool shouldSpawn = (Random.Range(1, 101) <= spawnProbability) && (availableLanes.Count > 0);
 
-                // ÁÖ»çÀ§ °á°ú¿¡ µû¶ó ÄÑ°Å³ª ²ü´Ï´Ù.
+                // ì£¼ì‚¬ìœ„ ê²°ê³¼ì— ë”°ë¼ ì¼œê±°ë‚˜ ë•ë‹ˆë‹¤.
                 obstacles[i].SetActive(shouldSpawn);
+
+                if (shouldSpawn)
+                {
+                    // ë‚¨ì€ ë ˆì¸ ë¦¬ìŠ¤íŠ¸ ì¤‘ì—ì„œ ë¬´ì‘ìœ„ë¡œ ì¸ë±ìŠ¤ë¥¼ í•˜ë‚˜ ì„ íƒí•©ë‹ˆë‹¤.
+                    int randomIndex = Random.Range(0, availableLanes.Count);
+                    float chosenX = availableLanes[randomIndex];
+
+                    // ë‹¤ë¥¸ ì¥ì• ë¬¼ì´ ì´ ë ˆì¸ì„ ë˜ ì“°ì§€ ëª»í•˜ë„ë¡ ë¦¬ìŠ¤íŠ¸ì—ì„œ ì œê±°í•©ë‹ˆë‹¤. (ì¤‘ë³µ ë°©ì§€ í•µì‹¬!)
+                    availableLanes.RemoveAt(randomIndex);
+
+                    // ì¥ì• ë¬¼ì˜ ë¡œì»¬ ì¢Œí‘œë¥¼ ë°›ì•„ì™€ Xì¶•ë§Œ ì„ íƒëœ ë ˆì¸ ê°’ìœ¼ë¡œ êµì²´í•©ë‹ˆë‹¤.
+                    Vector3 currentPos = obstacles[i].transform.localPosition;
+                    obstacles[i].transform.localPosition = new Vector3(chosenX, currentPos.y, currentPos.z);
+                }
             }
         }
+        // -----------------------------------------------------------------
 
-        // ¹Ù´ÚÀÌ ÃÊ±âÈ­µÉ ¶§¸¶´Ù ÄÚÀÎ À§Ä¡µµ »õ·Î ·£´ıÇÏ°Ô Àâ¾ÆÁİ´Ï´Ù.
+        // ë°”ë‹¥ì´ ì´ˆê¸°í™”ë  ë•Œë§ˆë‹¤ ì½”ì¸ ìœ„ì¹˜ë„ ìƒˆë¡œ ëœë¤í•˜ê²Œ ì¡ì•„ì¤ë‹ˆë‹¤.
         if (coins != null)
         {
             foreach (GameObject coin in coins)
             {
-                // ÄÚÀÎÀÌ ³ª¿Ã È®·ü ¼³Á¤ (¿¹: 60% È®·ü·Î ÄÚÀÎ µîÀå)
+                // ì½”ì¸ì´ ë‚˜ì˜¬ í™•ë¥  ì„¤ì • (ì˜ˆ: 60% í™•ë¥ ë¡œ ì½”ì¸ ë“±ì¥)
                 if (Random.Range(0, 100) < 60)
                 {
                     bool foundSafePosition = false;
                     Vector3 spawnPos = Vector3.zero;
 
-                    // Àå¾Ö¹°°ú °ãÄ¡Áö ¾Ê´Â ÀÚ¸®¸¦ Ã£±â À§ÇØ ÃÖ´ë 5¹ø ½ÃµµÇÕ´Ï´Ù.
+                    // ì¥ì• ë¬¼ê³¼ ê²¹ì¹˜ì§€ ì•ŠëŠ” ìë¦¬ë¥¼ ì°¾ê¸° ìœ„í•´ ìµœëŒ€ 5ë²ˆ ì‹œë„í•©ë‹ˆë‹¤.
                     for (int attempts = 0; attempts < 5; attempts++)
                     {
-                        // ÇöÀç ¹Ù´Ú ±âÁØÀ¸·Î ·£´ıÇÑ ·ÎÄÃ ÁÂÇ¥¸¦ »Ì½À´Ï´Ù.
-                        // (Àº±Ô´Ô ¸Ê Å©±â¿¡ ¸ÂÃç ¹üÀ§ X, Y, Z ¼ıÀÚ¸¦ Á¶ÀıÇØ ÁÖ¼¼¿ä!)
+                        // í˜„ì¬ ë°”ë‹¥ ê¸°ì¤€ìœ¼ë¡œ ëœë¤í•œ ë¡œì»¬ ì¢Œí‘œë¥¼ ë½‘ìŠµë‹ˆë‹¤.
                         float randomX = Random.Range(-3.5f, 3.5f);
                         float randomY = Random.Range(1f, 3.5f);
                         float randomZ = Random.Range(-3.5f, 3.5f);
@@ -129,7 +154,7 @@ public class Ground : MonoBehaviour
                         Vector3 localPos = new Vector3(randomX, randomY, randomZ);
                         spawnPos = transform.position + localPos;
 
-                        // ÇØ´ç À§Ä¡¿¡ Àå¾Ö¹°(Obstacle)ÀÌ °ãÃÄ ÀÖ´ÂÁö 'º¸ÀÌÁö ¾Ê´Â ¿ø'À» ±×·Á¼­ °Ë»çÇÕ´Ï´Ù.
+                        // í•´ë‹¹ ìœ„ì¹˜ì— ì¥ì• ë¬¼(Obstacle)ì´ ê²¹ì³ ìˆëŠ”ì§€ 'ë³´ì´ì§€ ì•ŠëŠ” ì›'ì„ ê·¸ë ¤ì„œ ê²€ì‚¬í•©ë‹ˆë‹¤.
                         Collider[] hits = Physics.OverlapSphere(spawnPos, coinSpawnRadius);
                         bool isOverlapping = false;
 
@@ -138,19 +163,19 @@ public class Ground : MonoBehaviour
                             if (hit.CompareTag("Obstacle"))
                             {
                                 isOverlapping = true;
-                                break; // Àå¾Ö¹° ¹ß°ß! ÀÌ¹ø À§Ä¡´Â ½ÇÆĞ
+                                break; // ì¥ì• ë¬¼ ë°œê²¬! ì´ë²ˆ ìœ„ì¹˜ëŠ” ì‹¤íŒ¨
                             }
                         }
 
-                        // °ãÄ¡´Â Àå¾Ö¹°ÀÌ ¾ø´Ù¸é? ¿Ïº®ÇÑ ÀÚ¸®ÀÔ´Ï´Ù!
+                        // ê²¹ì¹˜ëŠ” ì¥ì• ë¬¼ì´ ì—†ë‹¤ë©´? ì™„ë²½í•œ ìë¦¬ì…ë‹ˆë‹¤!
                         if (!isOverlapping)
                         {
                             foundSafePosition = true;
-                            break; // ÀÚ¸® Ã£±â ¹İº¹¹® Å»Ãâ
+                            break; // ìë¦¬ ì°¾ê¸° ë°˜ë³µë¬¸ íƒˆì¶œ
                         }
                     }
 
-                    // ¾ÈÀüÇÑ ÀÚ¸®¸¦ Ã£¾Ò´Ù¸é ÄÚÀÎÀ» ¹èÄ¡ÇÏ°í ÄÕ´Ï´Ù.
+                    // ì•ˆì „í•œ ìë¦¬ë¥¼ ì°¾ì•˜ë‹¤ë©´ ì½”ì¸ì„ ë°°ì¹˜í•˜ê³  ì¼­ë‹ˆë‹¤.
                     if (foundSafePosition)
                     {
                         coin.transform.position = spawnPos;
@@ -158,22 +183,20 @@ public class Ground : MonoBehaviour
                     }
                     else
                     {
-                        coin.SetActive(false); // ³¡³» ºóÀÚ¸®¸¦ ¸ø Ã£¾Ò´Ù¸é ÄÑÁö ¾Ê½À´Ï´Ù.
+                        coin.SetActive(false); // ëë‚´ ë¹ˆìë¦¬ë¥¼ ëª» ì°¾ì•˜ë‹¤ë©´ ì¼œì§€ ì•ŠìŠµë‹ˆë‹¤.
                     }
                 }
                 else
                 {
-                    coin.SetActive(false); // È®·ü¿¡ ´çÃ·µÇÁö ¾ÊÀ¸¸é ÄÑÁö ¾Ê½À´Ï´Ù.
+                    coin.SetActive(false); // í™•ë¥ ì— ë‹¹ì²¨ë˜ì§€ ì•Šìœ¼ë©´ ì¼œì§€ ì•ŠìŠµë‹ˆë‹¤.
                 }
             }
         }
     }
 
-
-    // ´ÙÀ½ Áö¸é À§Ä¡¸¦ ¼³Á¤ÇÕ´Ï´Ù.
+    // ë‹¤ìŒ ì§€ë©´ ìœ„ì¹˜ë¥¼ ì„¤ì •í•©ë‹ˆë‹¤.
     public void SetNextGround(Ground nextGround)
     {
         this.nextGround = nextGround;
     }
 }
-
