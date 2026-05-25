@@ -1,11 +1,12 @@
-using UnityEngine;
+using NUnit.Framework;
 // 데이터 베이스를 사용하기 위함
 using SQLite;
-using System.IO;
 // 리스트나 딕셔너리같은 동적 데이터 묶음을 사용하기위해 필요하다.
 using System.Collections.Generic;
+using System.IO;
+using Unity.VisualScripting;
 using UnityEditor.MemoryProfiler;
-using NUnit.Framework;
+using UnityEngine;
 
 public class GameUser
 {
@@ -46,6 +47,9 @@ public class Database_Test : MonoBehaviour
         Debug.Log("DB 실제 경로 : " + dbPath);
         connection = new SQLiteConnection(dbPath);
         connection.CreateTable<GameUser>();
+
+        // 데이터 삭제할 때 주석 취소 처리해서 한번 실행해주세요.
+        // DeleteAllData();
 
         // DB 연결 및 테이블 자동 생성
         // using 블록을 지정하면 에러가 발생하더라도 블록을 빠져나갈 때자동으로 안전하게 닫는다.
@@ -131,6 +135,21 @@ public class Database_Test : MonoBehaviour
             connection.Dispose();
             connection = null;
             Debug.Log("데이터베이스 연결을 안전히 해제했습니다!");
+        }
+    }
+
+    void DeleteAllData()
+    {
+        try
+        {
+            connection.DeleteAll<GameUser>();
+            Debug.Log("모든 데이터를 삭제했습니다!");
+        }
+
+        catch (SQLiteException ex)
+        {
+            Debug.LogWarning("데이터 삭제에 실패 했습니다!");
+            Debug.LogWarning(ex.Message);
         }
     }
 }

@@ -78,8 +78,8 @@ public class GameManager : MonoBehaviour
         {
             // E 키를 누르면 아예 게임을 종료하고
             // 현재 데이터를 최신화
-            if (Input.GetKeyDown(KeyCode.E))
-            EndEverythings();
+            if (Input.GetKeyDown(KeyCode.E) && isGameover)
+                EndEverythings();
         }
     }
 
