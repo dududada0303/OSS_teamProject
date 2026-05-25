@@ -78,6 +78,7 @@ Prefab Override(Apply All)를 활용해 무한 스크롤되는 모든 바닥 맵
 - 점프를 조금 더 짧게 하도록 변경하였습니다.
 - 플레이어가 땅 밖으로 나가지 못하도록 플레이어 이동 반경을 설정하였습니다.
 
+<<<<<<< HEAD
 [2026.05.24]
 1. Player 변경
 - 외형을 고양이로 변경
@@ -94,6 +95,8 @@ Prefab Override(Apply All)를 활용해 무한 스크롤되는 모든 바닥 맵
 4. 배경 추가
 - 2D 배경 추가
 
+=======
+>>>>>>> parent of 1b8de2b (Merge branch 'synthesis_backup' of https://github.com/dududada0303/OSS_teamProject into synthesis_backup)
 -----------------------------------------------------------------------------------------------------------------------------
 [김은규]
 
