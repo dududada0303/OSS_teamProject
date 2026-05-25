@@ -1,6 +1,5 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
+using TMPro;
 
 public class DistanceManager : MonoBehaviour
 {
@@ -12,14 +11,11 @@ public class DistanceManager : MonoBehaviour
     public float speedIncreaseAmount = 1.0f; // 레벨업 시 증가할 속도량
     public int levelUpDistance = 50;        // 몇 m마다 속도를 올릴지 기준 설정 
 
-    public float currentDistance = 0f;      // 현재까지 달려온 거리
+    private float currentDistance = 0f;      // 현재까지 달려온 거리
     private int nextLevelDistance;           // 다음 레벨업을 위한 목표 거리
-
-    public LeaderBoard leaderBoard;
 
     void Start()
     {
-        leaderBoard = FindObjectOfType<LeaderBoard>();
         // 1. 게임 시작 시, 첫 번째 목표 거리를 설정합니다.
         nextLevelDistance = levelUpDistance;
 
@@ -34,7 +30,7 @@ public class DistanceManager : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale > 0f && leaderBoard.userName != null)
+        if (Time.timeScale > 0f)
         {
             // 고정된 속도가 아니라, 계속 빨라지는 currentSpeed를 이용해 거리를 잽니다.
             currentDistance += currentSpeed * Time.deltaTime;
@@ -47,6 +43,7 @@ public class DistanceManager : MonoBehaviour
             }
         }
     }
+
     //  속도를 올려주는 레벨업 함수입니다.
     void LevelUp()
     {

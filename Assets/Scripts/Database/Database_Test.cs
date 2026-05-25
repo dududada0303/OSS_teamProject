@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEditor.MemoryProfiler;
 using NUnit.Framework;
 
+
 public class GameUser
 {
     // Id를 기본 키(PrimaryKey)로 설정하고, 데이터 추가될 때마다 1씩 증가(AutoIncrement)
@@ -31,7 +32,7 @@ public class GameUser
     // 오버라이드에 사용할 변수가 있는 클래스 내부에 직접 재정의하는 게 편리하다.
     public override string ToString()
     {
-        return $"[Id : {Id}] {userName} [Coin : {Coin}] [Distance : {Distance}]\n";
+        return $"[Id : {Id}] {userName} [Coin : {Coin}] [Distance : {Distance}]";
     }
 }
 
@@ -39,7 +40,7 @@ public class Database_Test : MonoBehaviour
 {
     // DB 객체를 다룰 변수
     private SQLiteConnection connection;
-    private void Awake()
+    private void Start()
     {
         // 저장할 경로, 파일명 설정
         string dbPath = Path.Combine(Application.persistentDataPath, "LocalDB.db");
